@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Transición · EDUCSI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul-oscuro: #1F4E79;
+    --azul-medio: #2E75B6;
+    --azul-claro: #BDD7EE;
+    --azul-suave: #EBF3FB;
+    --verde-acento: #4DAE8F;
+    --texto: #1a2332;
+    --texto-suave: #5a6a7e;
+    --blanco: #ffffff;
+    --fondo: #F7FAFD;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30,78,121,0.1);
+    box-shadow: 0 2px 20px rgba(30,78,121,0.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--azul-oscuro);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--azul-medio); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    color: var(--texto-suave); letter-spacing: 0.03em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--azul-medio); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+    padding: 8rem 3rem 4rem;
+    gap: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,117,182,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -10%; left: -5%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(77,174,143,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--azul-medio);
+    border: 1px solid var(--azul-claro);
+    padding: 0.35rem 1rem; border-radius: 100px;
+    margin-bottom: 1.5rem;
+    background: var(--azul-suave);
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 900; line-height: 1.08;
+    color: var(--azul-oscuro);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--azul-medio); }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75;
+    color: var(--texto-suave); max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.8rem; border-radius: 8px;
+    background: var(--azul-oscuro); color: white;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(31,78,121,0.25);
+  }
+  .btn-primary:hover { background: var(--azul-medio); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(31,78,121,0.3); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.8rem; border-radius: 8px;
+    border: 1.5px solid var(--azul-claro); color: var(--azul-oscuro);
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--azul-medio); background: var(--azul-suave); }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative; z-index: 1;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-card {
+    background: white; border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(31,78,121,0.12);
+    border: 1px solid rgba(189,215,238,0.5);
+  }
+  .hero-card-title {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--texto-suave);
+    margin-bottom: 1.5rem;
+  }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .stat-item {
+    background: var(--azul-suave); border-radius: 12px;
+    padding: 1.2rem; text-align: center;
+    border: 1px solid rgba(189,215,238,0.6);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--azul-oscuro); display: block;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--texto-suave); margin-top: 0.2rem; }
+  .stat-item.accent { background: var(--azul-oscuro); border-color: var(--azul-oscuro); }
+  .stat-item.accent .stat-num { color: white; }
+  .stat-item.accent .stat-label { color: var(--azul-claro); }
+  .stat-item.green { background: rgba(77,174,143,0.1); border-color: rgba(77,174,143,0.3); }
+  .stat-item.green .stat-num { color: #2d7a60; }
+
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--azul-claro), transparent); margin: 0; }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding: 6rem 3rem; }
+
+  .section-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--azul-medio);
+    margin-bottom: 1rem; display: block;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700;
+    color: var(--azul-oscuro); line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-intro {
+    font-size: 1rem; line-height: 1.8; color: var(--texto-suave);
+    max-width: 620px; margin-bottom: 3.5rem;
+  }
+
+  /* ── QUÉ ES ── */
+  .que-es-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .valores-list { list-style: none; margin-top: 2rem; }
+  .valores-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(189,215,238,0.5);
+    font-size: 0.95rem; color: var(--texto-suave); line-height: 1.6;
+  }
+  .valores-list li:last-child { border-bottom: none; }
+  .valor-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--azul-suave); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+    border: 1px solid rgba(189,215,238,0.7);
+  }
+  .valor-name { font-weight: 600; color: var(--azul-oscuro); display: block; margin-bottom: 0.2rem; }
+  .impacto-box {
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 100%);
+    border-radius: 20px; padding: 2.5rem;
+    color: white;
+  }
+  .impacto-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; }
+  .impacto-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.9rem;
+  }
+  .impacto-item:last-child { border-bottom: none; }
+  .impacto-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--verde-acento); flex-shrink: 0; }
+
+  /* ── OBJETIVOS ── */
+  .objetivos-bg { background: var(--azul-suave); }
+  .objetivos-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .obj-card {
+    background: white; border-radius: 16px; padding: 2rem;
+    border: 1px solid rgba(189,215,238,0.6);
+    box-shadow: 0 4px 20px rgba(31,78,121,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .obj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(31,78,121,0.12); }
+  .obj-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--azul-suave); display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+    border: 1px solid rgba(189,215,238,0.8);
+  }
+  .obj-card h3 { font-size: 1rem; font-weight: 600; color: var(--azul-oscuro); margin-bottom: 0.8rem; }
+  .obj-card ul { list-style: none; }
+  .obj-card ul li {
+    font-size: 0.88rem; color: var(--texto-suave); line-height: 1.6;
+    padding: 0.35rem 0; padding-left: 1rem; position: relative;
+  }
+  .obj-card ul li::before {
+    content: '›'; position: absolute; left: 0;
+    color: var(--azul-medio); font-weight: 600;
+  }
+
+  /* ── AGENTES ── */
+  .agentes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .agente-card {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    background: white; border-radius: 14px; padding: 1.8rem;
+    border: 1px solid rgba(189,215,238,0.5);
+    box-shadow: 0 2px 12px rgba(31,78,121,0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .agente-card:hover { border-color: var(--azul-claro); box-shadow: 0 6px 20px rgba(31,78,121,0.1); }
+  .agente-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700; color: var(--azul-claro);
+    line-height: 1; flex-shrink: 0; min-width: 2.5rem;
+  }
+  .agente-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--azul-oscuro); margin-bottom: 0.5rem; }
+  .agente-card p { font-size: 0.87rem; color: var(--texto-suave); line-height: 1.65; }
+
+  /* ── ESCENARIOS ── */
+  .escenarios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .escenario-card {
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31,78,121,0.1);
+  }
+  .escenario-header {
+    padding: 2rem 2rem 1.5rem;
+    background: var(--azul-oscuro);
+    position: relative; overflow: hidden;
+  }
+  .escenario-header.b { background: linear-gradient(135deg, #1a3a5c 0%, var(--azul-medio) 100%); }
+  .escenario-header::after {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .escenario-badge {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(255,255,255,0.15); color: white;
+    padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 0.8rem;
+  }
+  .escenario-header h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 0.5rem; }
+  .escenario-header p { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+  .escenario-body { background: white; padding: 2rem; }
+  .paso {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 0.8rem 0; border-bottom: 1px solid rgba(189,215,238,0.4);
+  }
+  .paso:last-child { border-bottom: none; }
+  .paso-num {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: var(--azul-suave); border: 1.5px solid var(--azul-claro);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 600; color: var(--azul-oscuro);
+  }
+  .paso-text { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.6; }
+  .paso-text strong { color: var(--azul-oscuro); display: block; margin-bottom: 0.2rem; font-weight: 500; }
+
+  /* ── CARPETAS ── */
+  .carpetas-bg { background: white; }
+  .carpetas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .carpeta-item {
+    border-radius: 12px; padding: 1.4rem;
+    border: 1px solid rgba(189,215,238,0.6);
+    background: var(--fondo);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .carpeta-item:hover { border-color: var(--azul-medio); transform: translateY(-2px); }
+  .carpeta-name {
+    font-size: 0.78rem; font-weight: 600; font-family: 'DM Sans', monospace;
+    color: var(--azul-medio); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .carpeta-item p { font-size: 0.83rem; color: var(--texto-suave); line-height: 1.6; }
+  .carpeta-tipos { font-size: 0.75rem; color: var(--azul-medio); margin-top: 0.6rem; font-weight: 500; }
+
+  /* ── EVALUACION ── */
+  .eval-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .eval-card {
+    background: white; border-radius: 14px; padding: 1.6rem;
+    border-left: 4px solid var(--azul-medio);
+    box-shadow: 0 2px 12px rgba(31,78,121,0.06);
+  }
+  .eval-card.alt { border-left-color: var(--verde-acento); }
+  .eval-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--azul-oscuro); margin-bottom: 0.8rem; }
+  .eval-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.8rem;
+    background: var(--azul-suave); color: var(--azul-medio);
+  }
+  .eval-tag.green { background: rgba(77,174,143,0.12); color: #2d7a60; }
+  .eval-items { list-style: none; }
+  .eval-items li {
+    font-size: 0.83rem; color: var(--texto-suave); line-height: 1.6;
+    padding: 0.3rem 0; padding-left: 1rem; position: relative;
+  }
+  .eval-items li::before { content: '·'; position: absolute; left: 0; color: var(--azul-medio); font-weight: 700; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--azul-oscuro); color: white;
+    padding: 3rem; text-align: center;
+  }
+  footer .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+  footer p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
+  footer .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; }
+  footer .footer-links a { font-size: 0.8rem; color: var(--azul-claro); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+  footer .footer-links a:hover { opacity: 1; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+    .hero-visual { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .que-es-grid, .escenarios-grid { grid-template-columns: 1fr; }
+    .objetivos-cards, .carpetas-grid, .eval-grid { grid-template-columns: 1fr; }
+    .agentes-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Plan de Transición · <span>EDUCSI</span></div>
+  <ul class="nav-links">
+    <li><a href="#que-es">Qué es</a></li>
+    <li><a href="#objetivos">Objetivos</a></li>
+    <li><a href="#agentes">Agentes</a></li>
+    <li><a href="#escenarios">Escenarios</a></li>
+    <li><a href="#carpetas">Documentación</a></li>
+    <li><a href="#evaluacion">Evaluación</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Jesuitas Educsi · Retos de la Formación</span>
+    <h1>Acompañar el cambio para <em>fortalecer</em> la misión</h1>
+    <p class="hero-desc">El Plan de Transición facilita el relevo de cargos de responsabilidad en los Equipos Directivos de la red Educsi, cuidando a las personas y potenciando su vocación de servicio.</p>
+    <div class="hero-ctas">
+      <a href="#que-es" class="btn-primary">Explorar el plan ↓</a>
+      <a href="#carpetas" class="btn-secondary">Ver documentación</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <p class="hero-card-title">El plan en cifras</p>
+      <div class="stats-grid">
+        <div class="stat-item accent">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Escenarios de implementación</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Fundaciones de la red Educsi</span>
+        </div>
+        <div class="stat-item green">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Agentes implicados</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3–4</span>
+          <span class="stat-label">Encuentros por proceso</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- QUÉ ES -->
+<section id="que-es">
+  <div class="que-es-grid">
+    <div>
+      <span class="section-label">Descripción</span>
+      <h2>¿Qué es el Plan de Transición?</h2>
+      <p class="section-intro">Una propuesta estratégica de Educsi para acompañar a los educadores y educadoras que dejan un cargo de responsabilidad, facilitando su integración en nuevos roles dentro de la institución.</p>
+      <ul class="valores-list">
+        <li>
+          <div class="valor-icon">🤝</div>
+          <div><span class="valor-name">Honestidad</span>Para honrar una comunidad compleja.</div>
+        </li>
+        <li>
+          <div class="valor-icon">🌱</div>
+          <div><span class="valor-name">Audacia</span>Para mantener la fidelidad creativa.</div>
+        </li>
+        <li>
+          <div class="valor-icon">🎁</div>
+          <div><span class="valor-name">Gratuidad</span>Para buscar el bien común.</div>
+        </li>
+        <li>
+          <div class="valor-icon">🌿</div>
+          <div><span class="valor-name">Humildad</span>Para crecer.</div>
+        </li>
+      </ul>
+    </div>
+    <div class="impacto-box reveal">
+      <h3>Impacto esperado</h3>
+      <div class="impacto-item"><div class="impacto-dot"></div>Mejora del clima institucional</div>
+      <div class="impacto-item"><div class="impacto-dot"></div>Reducción del desgaste emocional</div>
+      <div class="impacto-item"><div class="impacto-dot"></div>Mayor compromiso con la Misión</div>
+      <div class="impacto-item"><div class="impacto-dot"></div>Visibilización del talento acumulado</div>
+      <div class="impacto-item"><div class="impacto-dot"></div>Cultura de relevo natural y sostenible</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OBJETIVOS -->
+<div class="section-full objetivos-bg" id="objetivos">
+  <section style="padding:0">
+    <span class="section-label">Para quién</span>
+    <h2>Objetivos del plan</h2>
+    <p class="section-intro">El plan coordina las necesidades de tres ámbitos distintos pero interconectados.</p>
+    <div class="objetivos-cards">
+      <div class="obj-card reveal">
+        <div class="obj-icon">⛪</div>
+        <h3>Para la Misión</h3>
+        <ul>
+          <li>Fomentar el equilibrio entre la Cura Personalis y la Cura Apostólica</li>
+          <li>Potenciar la vocación de servicio e identidad ignaciana</li>
+          <li>Promover la misión educativa de la Compañía de Jesús</li>
+        </ul>
+      </div>
+      <div class="obj-card reveal">
+        <div class="obj-icon">👥</div>
+        <h3>Para los Equipos</h3>
+        <ul>
+          <li>Facilitar el relevo en los equipos directivos de los centros</li>
+          <li>Garantizar continuidad y eficiencia en el cambio de liderazgo</li>
+          <li>Proceso estructurado con acompañamiento eficaz</li>
+        </ul>
+      </div>
+      <div class="obj-card reveal">
+        <div class="obj-icon">🧑‍🏫</div>
+        <h3>Para los Educadores</h3>
+        <ul>
+          <li>Suscitar ilusión y re-ilusión con la Misión</li>
+          <li>Reconocer y poner en valor el talento adquirido</li>
+          <li>Minimizar la desafección y facilitar la integración al nuevo rol</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<!-- AGENTES -->
+<section id="agentes">
+  <span class="section-label">Quiénes participan</span>
+  <h2>Agentes implicados</h2>
+  <p class="section-intro">Cuatro agentes con roles diferenciados que trabajan de forma coordinada a lo largo del proceso.</p>
+  <div class="agentes-grid">
+    <div class="agente-card reveal">
+      <div class="agente-num">01</div>
+      <div>
+        <h3>Fundaciones EDUCSI</h3>
+        <p>Dirección General y/o Coordinación del área de personas. Informan a las Direcciones Titulares, proponen acompañantes y recogen la evaluación del proceso.</p>
+      </div>
+    </div>
+    <div class="agente-card reveal">
+      <div class="agente-num">02</div>
+      <div>
+        <h3>Direcciones Titulares</h3>
+        <p>Localizan a las personas candidatas, proponen su participación voluntaria en el plan y generan los espacios necesarios para facilitar el retorno al nuevo rol.</p>
+      </div>
+    </div>
+    <div class="agente-card reveal">
+      <div class="agente-num">03</div>
+      <div>
+        <h3>Educadores y Educadoras</h3>
+        <p>Personas que han ejercido un cargo de responsabilidad y se incorporan a nuevos roles en el claustro docente. Participación voluntaria.</p>
+      </div>
+    </div>
+    <div class="agente-card reveal">
+      <div class="agente-num">04</div>
+      <div>
+        <h3>Personas Acompañantes</h3>
+        <p>Figuras voluntarias con experiencia, empatía y compromiso institucional. Sin relación jerárquica con la persona acompañada. Forman la Red de Acompañantes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ESCENARIOS -->
+<section id="escenarios">
+  <span class="section-label">Implementación</span>
+  <h2>Dos escenarios de aplicación</h2>
+  <p class="section-intro">El plan se adapta a dos momentos distintos del proceso de relevo, según cuándo se detecte la situación.</p>
+  <div class="escenarios-grid">
+    <div class="escenario-card reveal">
+      <div class="escenario-header">
+        <span class="escenario-badge">Escenario A</span>
+        <h3>Curso posterior a la salida</h3>
+        <p>El cambio de rol ya se ha efectuado. Se aplica a comienzos del curso siguiente.</p>
+      </div>
+      <div class="escenario-body">
+        <div class="paso">
+          <div class="paso-num">1</div>
+          <div class="paso-text"><strong>Reunión inicial</strong>La Dirección ofrece la participación voluntaria en el plan.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">2</div>
+          <div class="paso-text"><strong>Bienvenida del Acompañante</strong>Primera sesión de presentación y autoevaluación inicial.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">3</div>
+          <div class="paso-text"><strong>1er periodo — Revisión</strong>Relectura del paso por el cargo, aprendizajes y recomendaciones.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">4</div>
+          <div class="paso-text"><strong>2º periodo — Reflexión sobre la Misión</strong>Dimensión emocional del cambio y conexión con la Misión.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">5</div>
+          <div class="paso-text"><strong>3er periodo — Integración</strong>Dar significado a la nueva realidad: YO + MISIÓN + EQUIPO.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">6</div>
+          <div class="paso-text"><strong>Evaluación final</strong>Encuentro de cierre y evaluación con todos los agentes.</div>
+        </div>
+      </div>
+    </div>
+    <div class="escenario-card reveal">
+      <div class="escenario-header b">
+        <span class="escenario-badge">Escenario B</span>
+        <h3>Curso en que se efectúa la salida</h3>
+        <p>Se aplica cuando se tiene claro que la persona va a cambiar de rol ese mismo curso.</p>
+      </div>
+      <div class="escenario-body">
+        <div class="paso">
+          <div class="paso-num">1</div>
+          <div class="paso-text"><strong>Reunión inicial</strong>La Dirección propone la incorporación al plan y crea la Red de Acompañantes.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">2</div>
+          <div class="paso-text"><strong>Bienvenida del Acompañante</strong>Primera sesión y relectura del paso por el cargo.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">3</div>
+          <div class="paso-text"><strong>2º periodo — Reflexión sobre la Misión</strong>Emociones del cambio y papel en la Misión del centro.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">4</div>
+          <div class="paso-text"><strong>3er periodo — Integración + Plan de Acción</strong>YO + MISIÓN + EQUIPO. Elaboración del Plan de Acción (modelo GROW).</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">5</div>
+          <div class="paso-text"><strong>4º periodo — Presentación del Plan</strong>Comparte el Plan de Acción con el Acompañante y la Dirección.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">6</div>
+          <div class="paso-text"><strong>Entrevistas con la Dirección (2 y 3)</strong>Coordinación de metas con las necesidades del centro.</div>
+        </div>
+        <div class="paso">
+          <div class="paso-num">7</div>
+          <div class="paso-text"><strong>Cierre del proceso</strong>Encuentro final y evaluación con todos los agentes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CARPETAS -->
+<div class="section-full carpetas-bg" id="carpetas">
+  <section style="padding:0">
+    <span class="section-label">Documentación</span>
+    <h2>Sistema de carpetas en Google Drive</h2>
+    <p class="section-intro">Carpeta raíz: <strong>EDUCSI_PLAN-TRANSICION</strong> · Estructura definitiva aprobada por el grupo de trabajo.</p>
+    <div class="carpetas-grid">
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">📄 00_PLAN_DEFINITIVO</div>
+        <p>Versión oficial y aprobada del plan. Documento de referencia estable para todos los agentes.</p>
+        <div class="carpeta-tipos">PDF · DOCX</div>
+      </div>
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">📢 01_COMUNICACION_Y_DIFUSION</div>
+        <p>Infografía resumen, presentaciones para centros y Fundaciones, y documento informativo para participantes.</p>
+        <div class="carpeta-tipos">PDF · PPTX · PNG</div>
+      </div>
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">📋 02_GESTION_DEL_PROYECTO</div>
+        <p>Planificación, cronogramas, actas de reuniones y datos del diagnóstico (formulario Luces y Sombras).</p>
+        <div class="carpeta-tipos">DOCX · XLSX · PDF</div>
+      </div>
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">🅰 03_MATERIALES_OPERATIVOS / escenario_A</div>
+        <p>Guiones de entrevista con la Dirección y los 3 encuentros del Acompañante para el Escenario A.</p>
+        <div class="carpeta-tipos">DOCX — plantillas de sesión</div>
+      </div>
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">🅱 03_MATERIALES_OPERATIVOS / escenario_B</div>
+        <p>Guiones de las 3 entrevistas con la Dirección y los 4 encuentros del Acompañante para el Escenario B.</p>
+        <div class="carpeta-tipos">DOCX — plantillas de sesión</div>
+      </div>
+      <div class="carpeta-item reveal">
+        <div class="carpeta-name">📊 04_EVALUACION</div>
+        <p>Todas las rúbricas: autoevaluación inicial y final, heteroevaluación, evaluación técnica y de acompañantes.</p>
+        <div class="carpeta-tipos">DOCX · PDF — formularios</div>
+      </div>
+      <div class="carpeta-item reveal" style="grid-column: 1 / -1; max-width: 380px;">
+        <div class="carpeta-name">🤝 05_FORMACION_RED_ACOMPAÑANTES</div>
+        <p>Guía del acompañante, perfil y criterios de selección, materiales de formación y lecturas recomendadas.</p>
+        <div class="carpeta-tipos">DOCX · PDF · enlaces</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<!-- EVALUACIÓN -->
+<section id="evaluacion">
+  <span class="section-label">Medición</span>
+  <h2>Sistema de evaluación</h2>
+  <p class="section-intro">Las rúbricas permiten contrastar el proceso desde la perspectiva de cada agente y en los momentos clave del acompañamiento.</p>
+  <div class="eval-grid">
+    <div class="eval-card reveal">
+      <span class="eval-tag">Persona acompañada</span>
+      <h4>Autoevaluación inicial y final</h4>
+      <ul class="eval-items">
+        <li>Reflexión sobre la trayectoria</li>
+        <li>Gestión emocional del cambio</li>
+        <li>Integración y sentido (YO+MISIÓN+EQUIPO)</li>
+        <li>Vocación de servicio y Misión</li>
+        <li>Relación con el relevo y el equipo</li>
+        <li>Plan de Acción (solo Escenario B)</li>
+      </ul>
+    </div>
+    <div class="eval-card alt reveal">
+      <span class="eval-tag green">Persona acompañante</span>
+      <h4>Heteroevaluación y evaluación técnica</h4>
+      <ul class="eval-items">
+        <li>Apertura y honestidad en la reflexión</li>
+        <li>Procesamiento de la dimensión emocional</li>
+        <li>Sentido de Misión (YO+MISIÓN+EQUIPO)</li>
+        <li>Coordinación entre agentes</li>
+        <li>Adherencia al cronograma</li>
+        <li>Red de Acompañantes</li>
+      </ul>
+    </div>
+    <div class="eval-card reveal">
+      <span class="eval-tag">Acompañante — autoevaluación</span>
+      <h4>Calidad del acompañamiento</h4>
+      <ul class="eval-items">
+        <li>Humildad y reconocimiento de límites</li>
+        <li>Suscitación vs. dirección</li>
+        <li>Gestión de la jerarquía y el ego</li>
+        <li>Empatía y dimensión emocional</li>
+        <li>Fidelidad a la Misión</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Plan de Transición · EDUCSI</div>
+  <p>Jesuitas Educsi · Retos de la Formación · 01/2026</p>
+  <p style="margin-top:0.3rem">Acompañar el cambio para fortalecer la misión</p>
+  <div class="footer-links">
+    <a href="#que-es">Qué es</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="#escenarios">Escenarios</a>
+    <a href="#carpetas">Documentación</a>
+    <a href="#evaluacion">Evaluación</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
